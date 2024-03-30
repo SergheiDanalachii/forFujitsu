@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "d5b020e0-6552-48d6-a91e-d888ff22c0dd",
+		"name": "FoodDelivery.postman_collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33880240"
+	},
+	"item": [
+		{
+			"name": "Checking the price for delivery",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"Pärnu\",\n    \"vehicleType\": \"Bike\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/calculateDeliveryFee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calculateDeliveryFee"
+					]
+				},
+				"description": "Retrieves the delivery price for the specified city using the specified vehicle type\n\nHTTP Status Codes:\n\n200 OK: Request processed successfully.\n\n404 Not Found: Record not found."
+			},
+			"response": []
+		},
+		{
+			"name": "Adding a new city, vehicle type, and delivery price",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"Narva\",\n    \"vehicleType\": \"Bike\",\n    \"price\": 2.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/delivery-prices/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"delivery-prices",
+						"add"
+					]
+				},
+				"description": "Adds a new record of delivery price for the specified city and vehicle type.\n\n200 OK: Record added successfully.\n\n400 Bad Request: Incorrect request format or missing required parameters."
+			},
+			"response": []
+		},
+		{
+			"name": "Changing the price for delivery",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"Pärnu\",\n    \"vehicleType\": \"Bike\",\n    \"price\": 3.0\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/delivery-prices/update?city=Pärnu&vehicleType=Bike&price=3.0",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"delivery-prices",
+						"update"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Pärnu",
+							"description": "The name of the city for which the delivery price is being updated."
+						},
+						{
+							"key": "vehicleType",
+							"value": "Bike",
+							"description": "The type of vehicle for which the delivery price is being updated."
+						},
+						{
+							"key": "price",
+							"value": "3.0",
+							"description": "The new price of delivery for the specified city and vehicle type."
+						}
+					]
+				},
+				"description": "Updates the delivery price for the specified city and vehicle type.\n200 OK: Record updated successfully.\n\n400 Bad Request: Incorrect request format or missing required parameters.\n\n404 Not Found: Record not found.\nparams for this"
+			},
+			"response": []
+		}
+	]
+}
